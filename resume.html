@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме — Латыпов Александр Андреевич | Fullstack Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="resume">
+    <div class="print-toolbar">
+        <button class="print-btn" onclick="window.print()">
+            <i class="fas fa-download"></i> Скачать PDF
+        </button>
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Вернуться на портфолио
+        </a>
+    </div>
+
+    <div class="resume-container">
+        <!-- HEADER -->
+        <header>
+            <div class="name">Латыпов Александр Андреевич</div>
+            <div class="position">Fullstack Developer | E-commerce & Automation Expert</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:aleksandlatypov@gmail.com">aleksandlatypov@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-telegram"></i>
+                    <a href="https://t.me/Apllonn" target="_blank">@Apllonn</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/AlexxLatt/" target="_blank">github.com/AlexxLatt</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- METRICS -->
+        <section>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">3+</div>
+                    <div class="metric-label">крупных проектов завершено</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">100+</div>
+                    <div class="metric-label">реализованных задач и фич</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">3+</div>
+                    <div class="metric-label">CMS в работе</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">30+</div>
+                    <div class="metric-label">кастомных решений</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUMMARY -->
+        <section>
+            <h2><i class="fas fa-briefcase"></i> Обо мне</h2>
+            <div class="summary">
+                Fullstack разработчик с 3+ годами опыта в разработке высоконагруженных e-commerce систем, интеграции платежных шлюзов и автоматизации бизнес-процессов. Специализируюсь на PHP, WordPress, 1С-Битрикс и DevOps решениях. Реализовал 50+ проектов и 100+ отдельных задач. Помогаю компаниям увеличивать продажи через надежные технологические решения.
+            </div>
+        </section>
+
+        <!-- KEY EXPERTISE -->
+        <section>
+            <h2><i class="fas fa-star"></i> Ключевая экспертиза</h2>
+            <div class="highlight">
+                <strong>🎯 Специализация:</strong> Разработка высоконагруженных e-commerce платформ, интеграция платежных систем (PayKeeper), системы подписок, REST API, фискализация (ФЗ-54), безопасность данных (AES-256), кеширование и оптимизация производительности.
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section>
+            <h2><i class="fas fa-laptop-code"></i> Ключевые проекты</h2>
+
+            <div class="project-item">
+                <div class="project-title">MEGAATOM — B2B платформа электронных компонентов</div>
+                <div class="project-tech">
+                    <span class="tech-tag">WordPress</span>
+                    <span class="tech-tag">cURL Multi</span>
+                    <span class="tech-tag">REST API</span>
+                    <span class="tech-tag">PHP 8.2</span>
+                    <span class="tech-tag">AES-256</span>
+                </div>
+                <p style="color: var(--secondary); font-size: 0.95rem; margin-bottom: 8px;">
+                    Высоконагруженная B2B платформа для электронных компонентов с интеграцией внешнего API поставщика и системой динамического ценообразования.
+                </p>
+                <ul class="job-details">
+                    <li>Создал Поиск 100+ товаров через API</li>
+                    <li>Реализовал кастомные страницы: корзина, оформление заказа + страница обработки</li>
+                    <li>Разработал большой функционал для пользователя и администратора</li>
+                    <li>Интеграция внешнего API поставщика с шифрованием (AES-256)</li>
+                    <li>Система динамического ценообразования в реальном времени</li>
+                </ul>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">VSTARCAM — Система подписок с интеграцией PayKeeper</div>
+                <div class="project-tech">
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">WooCommerce</span>
+                    <span class="tech-tag">PayKeeper API</span>
+                    <span class="tech-tag">Banking Systems</span>
+                    <span class="tech-tag">Security</span>
+                </div>
+                <p style="color: var(--secondary); font-size: 0.95rem; margin-bottom: 8px;">
+                    Интеграция банковских платежных систем и реализация защищенного API для видеонаблюдения премиум-класса. Система подписок с автоматической обработкой платежей.
+                </p>
+                <ul class="job-details">
+                    <li>Интегрировал экваринг платежи через PayKeeper с функциями подписки</li>
+                    <li>Реализовал административное управление подписками</li>
+                    <li>Обработка webhook'ов с проверкой цифровой подписи</li>
+                    <li>Автоматическая выдача QR-кодов активации через email</li>
+                    <li>Фискальная корзина согласно ФЗ-54 (ФНС)</li>
+                </ul>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">MONOLIT — Портал промышленного предприятия на 1С-Битрикс</div>
+                <div class="project-tech">
+                    <span class="tech-tag">1С-Битрикс</span>
+                    <span class="tech-tag">Custom Components</span>
+                    <span class="tech-tag">Performance</span>
+                </div>
+                <p style="color: var(--secondary); font-size: 0.95rem; margin-bottom: 8px;">
+                    Разработка уникальных компонентов и оптимизация производительности для промышленного предприятия на базе 1С-Битрикс.
+                </p>
+                <ul class="job-details">
+                    <li>Создание и верстка адаптивных страниц с кастомным дизайном</li>
+                    <li>Интеграция с компонентами 1С-Битрикс</li>
+                    <li>Разработка уникальных кастомных компонентов</li>
+                    <li>Оптимизация производительности и кеширования</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- TECHNICAL SKILLS -->
+        <section>
+            <h2><i class="fas fa-tools"></i> Технические навыки</h2>
+            <div class="skills-grid">
+                <div class="skills-category">
+                    <h4><i class="fas fa-cube"></i> CMS & Frameworks</h4>
+                    <ul>
+                        <li>1С-Битрикс (v15-23, Aspro)</li>
+                        <li>Битрикс24 (порталы, CRM)</li>
+                        <li>WordPress + WooCommerce</li>
+                        <li>OpenCart</li>
+                    </ul>
+                </div>
+
+                <div class="skills-category">
+                    <h4><i class="fas fa-server"></i> Backend & DevOps</h4>
+                    <ul>
+                        <li>PHP 7.4 - 8.5</li>
+                        <li>Оптимизация производительности</li>
+                        <li>Redis + Supervisor</li>
+                        <li>Docker контейнеризация</li>
+                        <li>Bash скрипты, Linux</li>
+                    </ul>
+                </div>
+
+                <div class="skills-category">
+                    <h4><i class="fas fa-shield-alt"></i> Безопасность</h4>
+                    <ul>
+                        <li>Защита XSS / CSRF</li>
+                        <li>Шифрование AES-256</li>
+                        <li>Валидация и санитизация</li>
+                        <li>Аудит безопасности</li>
+                        <li>API безопасность</li>
+                    </ul>
+                </div>
+
+                <div class="skills-category">
+                    <h4><i class="fas fa-database"></i> Базы данных</h4>
+                    <ul>
+                        <li>MySQL оптимизация</li>
+                        <li>Индексация и кэширование</li>
+                        <li>Репликация, миграции</li>
+                        <li>Резервное копирование</li>
+                    </ul>
+                </div>
+
+                <div class="skills-category">
+                    <h4><i class="fas fa-code"></i> Frontend & API</h4>
+                    <ul>
+                        <li>JavaScript / jQuery</li>
+                        <li>HTML5 / CSS3</li>
+                        <li>REST API разработка</li>
+                        <li>cURL, JSON</li>
+                    </ul>
+                </div>
+
+                <div class="skills-category">
+                    <h4><i class="fas fa-payment"></i> Платежи & Фискализация</h4>
+                    <ul>
+                        <li>PayKeeper интеграция</li>
+                        <li>Яндекс.Касса / Яндекс.Платежи</li>
+                        <li>ФЗ-54 (ФНС) соответствие</li>
+                        <li>HMAC-SHA256, MD5 подписи</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- METHODOLOGY & APPROACH -->
+        <section>
+            <h2><i class="fas fa-lightbulb"></i> Методология работы</h2>
+            <div class="job-details" style="font-weight: 500;">
+                <li>STAR методология в описании проектов (Situation → Task → Action → Result)</li>
+                <li>Тестирование безопасности и оптимизация производительности</li>
+                <li>Идемпотентность webhook'ов и обработка ошибок</li>
+                <li>Логирование с контекстом для быстрой отладки</li>
+                <li>Документирование кода и API</li>
+                <li>Масштабируемая архитектура с учетом роста</li>
+            </div>
+        </section>
+
+        <!-- ACHIEVEMENTS -->
+        <section>
+            <h2><i class="fas fa-trophy"></i> Достижения</h2>
+            <div class="job-details">
+                <li><strong>100+ реализованных задач и фич:</strong> разработал функционал для 3+ крупных проектов</li>
+                <li><strong>30+ кастомных решений для CMS:</strong> компоненты для 1С-Битрикс, WordPress, OpenCart</li>
+                <li><strong>Полная автоматизация платежного цикла:</strong> PayKeeper интеграция → фискализация → выдача QR-кодов → email</li>
+                <li><strong>Безопасность на уровне enterprise:</strong> AES-256 шифрование, HMAC-SHA256 подписи, CSRF защита</li>
+                <li><strong>Оптимизация производительности:</strong> Redis кеширование, MySQL индексация, cURL Multi запросы</li>
+                <li><strong>Масштабируемая архитектура:</strong> готовые решения для интеграции новых платежных систем</li>
+            </div>
+        </section>
+
+        <!-- LANGUAGES & AVAILABILITY -->
+        <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <div>
+                <h2 style="margin-bottom: 15px;"><i class="fas fa-globe"></i> Языки</h2>
+                <div class="job-details">
+                    <li><strong>Русский</strong> — родной</li>
+                    <li><strong>Английский</strong> — уровень B1 (техническая документация)</li>
+                </div>
+            </div>
+
+            <div>
+                <h2 style="margin-bottom: 15px;"><i class="fas fa-clock"></i> Доступность</h2>
+                <div class="job-details">
+                    <li><strong>Ответ на предложения:</strong> в течение 2-4 часов</li>
+                    <li><strong>Формат:</strong> проектная работа / фриланс</li>
+                    <li><strong>Часовой пояс:</strong> UTC+3 (Москва)</li>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--border); color: var(--secondary); font-size: 0.9rem;">
+            <p><strong>Латыпов Александр Андреевич</strong> | Fullstack Developer</p>
+            <p>📧 aleksandlatypov@gmail.com | 💬 @Apllonn (Telegram) | 🖥️ github.com/AlexxLatt</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">Последнее обновление: февраль 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

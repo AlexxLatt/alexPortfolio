@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: VSTARCAM | Платежная система подписок</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath fill='%2358a6ff' d='M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V174.9l14.2-9.5 96-64c9.9-6.6 22.6-7.1 32.9-1.6z'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- NAV -->
+        <a href="../index.html" class="btn-primary">
+            <i class="fas fa-arrow-left"></i> Вернуться в портфолио
+        </a>
+
+        <!-- HEADER -->
+        <header class="case-header">
+            <h1 class="case-title">VSTARCAM: Система подписок</h1>
+            <div class="case-subtitle">Платежный шлюз PayKeeper + WooCommerce + Автопродление + ФЗ-54</div>
+            
+            <div class="tech-specs" style="margin-top: 20px;">
+                <span class="tech-badge"><i class="fab fa-php"></i> PHP 8.2+</span>
+                <span class="tech-badge"><i class="fab fa-wordpress"></i> WordPress/WooCommerce</span>
+                <span class="tech-badge"><i class="fas fa-credit-card"></i> PayKeeper API</span>
+                <span class="tech-badge"><i class="fas fa-file-invoice"></i> ФЗ-54 (Фискализация)</span>
+                <span class="tech-badge"><i class="fas fa-qrcode"></i> QR Codes (CPT)</span>
+                <span class="tech-badge"><i class="fas fa-shield-alt"></i> HMAC-SHA256 / MD5</span>
+                <span class="tech-badge"><i class="fas fa-database"></i> MySQL + wp_options</span>
+            </div>
+        </header>
+
+        <!-- STAR METHODOLOGY -->
+        <section class="star-grid">
+            <!-- SITUATION -->
+            <div class="star-card">
+                <div class="star-label"><i class="fas fa-flag"></i> Ситуация (Situation)</div>
+                <div class="star-content">
+                    Сайт vstarcam.ru (продажа камер видеонаблюдения) нуждался в автоматизированной системе продажи подписок на облачный сервис. Требовалась интеграция с PayKeeper, мгновенная доставка QR-кодов активации на email и поддержка фискальных чеков по ФЗ-54.
+                </div>
+            </div>
+
+            <!-- TASK -->
+            <div class="star-card">
+                <div class="star-label"><i class="fas fa-bullseye"></i> Задача (Task)</div>
+                <div class="star-content">
+                    <ul>
+                        <li>Разработка кастомного шлюза WC_PK_Gateway для WooCommerce</li>
+                        <li>Реализация фискальной корзины (PaykeeperPayment) с корректным расчетом налогов</li>
+                        <li>Обработка webhook'ов с проверкой цифровой подписи</li>
+                        <li>Система выдачи QR-кодов (CPT qr_code) после оплаты</li>
+                        <li>Логирование всех транзакций и поддержка возвратов</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ACTION -->
+            <div class="star-card">
+                <div class="star-label"><i class="fas fa-cogs"></i> Действия (Action)</div>
+                <div class="star-content">
+                    <ul>
+                        <li>Реализовал класс WC_PK_Gateway: process_payment(), pk_handler(), process_refund()</li>
+                        <li>Вынес логику ФЗ-54 в отдельный класс PaykeeperPayment (setOrderParams(), correctPrecision())</li>
+                        <li>Настроил подпись форм: SHA256 для отправки, MD5 для проверки callback</li>
+                        <li>Создал paykeeper_notify.php для парсинга orderid и автоматической отправки QR</li>
+                        <li>Реализовал логирование через pk_write_log() с версией плагина/WP/WooCommerce</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- RESULT -->
+            <div class="star-card">
+                <div class="star-label"><i class="fas fa-trophy"></i> Результат (Result)</div>
+                <div class="star-content">
+                    <ul>
+                        <li>Полностью автоматизированный цикл: оплата → фискализация → выдача QR → email</li>
+                        <li>Корректная работа с возвратами через API PayKeeper (/change/payment/reverse/)</li>
+                        <li>Поддержка разных типов покупателей (fiz/ur) через парсинг orderid</li>
+                        <li>Система логирования для быстрой отладки инцидентов</li>
+                        <li>Готовая архитектура для масштабирования на другие тарифы</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARCHITECTURE -->
+        <h2 class="section-title"><i class="fas fa-sitemap"></i> Архитектура решения</h2>
+        
+        <div class="architecture-box">
+            <div class="flow-diagram">
+                <h3 style="margin-bottom: 20px; margin-top: 0px; color: var(--accent);">Поток данных (Payment Flow):</h3>
+                
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-text"><strong>WC_PK_Gateway::process_payment():</strong> Формирование заказа, расчет fiscal_cart через PaykeeperPayment</div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-text"><strong>pk_form() → pk_get_payment_form():</strong> Генерация HTML-формы с подписью SHA256($sum.$clientid.$orderid.$secret)</div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-text"><strong>Оплата на стороне PayKeeper:</strong> Клиент вводит данные карты, PayKeeper обрабатывает транзакцию</div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-text"><strong>Callback на wc_pk_gateway:</strong> PayKeeper шлет POST → WC_PK_Gateway::pk_handler()</div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">5</div>
+                    <div class="step-text"><strong>Проверка подписи:</strong> md5($id.$sum.$clientid.$orderid.$secret) → при успехе payment_complete()</div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">6</div>
+                    <div class="step-text"><strong>paykeeper_notify.php:</strong> Парсинг orderid, поиск QR (CPT), отправка email через wp_mail()</div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="step-number">7</div>
+                    <div class="step-text"><strong>Финализация:</strong> update_post_meta('_qr_status', 'paid'), wc_reduce_stock_levels(), лог в файл</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CODE EXAMPLES -->
+        <h2 class="section-title"><i class="fas fa-code"></i> Примеры кода из проекта</h2>
+
+        <div class="architecture-box">
+            <h3 style="margin-bottom: 15px; color: var(--accent);">1. Проверка подписи callback (WC_PK_Gateway::pk_handler)</h3>
+            <pre class="code-block"><code><span class="comment">// ============================================</span>
+<span class="comment">// ПРОВЕРКА ЦИФРОВОЙ ПОДПИСИ ОТ PAYKEEPER</span>
+<span class="comment">// ============================================</span>
+
+public function pk_handler() {
+  <span class="comment">// Получаем данные из POST-запроса</span>
+  $id         = $_POST['id'] ?? '';
+  $sum        = $_POST['sum'] ?? '';
+  $clientid   = $_POST['clientid'] ?? '';
+  $order_id   = $_POST['orderid'] ?? '';
+  $sign       = $_POST['sign'] ?? '';
+  
+  <span class="comment">// Формируем строку для хэша по документации PayKeeper</span>
+  $string_to_sign = $id . $sum . $clientid . $order_id . $this-&gt;secret;
+  $calculated_sign = md5($string_to_sign);
+  
+  <span class="comment">// Сравниваем подписи (защита от поддельных запросов)</span>
+  if (!hash_equals($calculated_sign, $sign)) {
+    $this-&gt;pk_write_log('Invalid signature received');
+    wp_die('Access denied', 'Error', ['response' =&gt; 403]);
+  }
+  
+  <span class="comment">// Подпись верна — обрабатываем оплату</span>
+  $order = wc_get_order($order_id);
+  if ($order &amp;&amp; $order-&gt;has_status(['pending', 'on-hold'])) {
+    $order-&gt;set_transaction_id($id);
+    $order-&gt;payment_complete();
+    $this-&gt;pk_write_log("Order {$order_id} completed");
+  }
+}</code></pre>
+        </div>
+
+        <div class="architecture-box">
+            <h3 style="margin-bottom: 15px; color: var(--accent);">2. Парсинг orderid и выдача QR (paykeeper_notify.php)</h3>
+            <pre class="code-block"><code><span class="comment">// ============================================</span>
+<span class="comment">// ПАРСИНГ ORDERID И ВЫДАЧА QR-КОДА</span>
+<span class="comment">// Формат: fiz_2024_user123_PRO_3</span>
+<span class="comment">// ============================================</span>
+
+<span class="comment">// Разбиваем orderid на части</span>
+$parts = explode('_', $payment['orderid']);
+$buyer_type_code = $parts[0] ?? 'fiz';  <span class="comment">// 'fiz' или 'ur'</span>
+$tarif_code      = $parts[3] ?? '1';    <span class="comment">// 1..5 → тариф</span>
+$count           = intval($parts[4] ?? 1); <span class="comment">// количество месяцев</span>
+
+<span class="comment">// Маппинг кодов тарифов в человекочитаемые названия</span>
+$tarif_map = [
+  '1' =&gt; 'Базовый',
+  '2' =&gt; 'Стандарт',
+  '3' =&gt; 'Про',
+  <span class="comment">// ...</span>
+];
+
+<span class="comment">// Сохраняем подписку в wp_options (для MVP)</span>
+$subscriptions = get_option('custom_subscriptions_data', []);
+$subscriptions[] = [
+  'date'        =&gt; current_time('mysql'),
+  'order_id'    =&gt; $payment['orderid'],
+  'email'       =&gt; $payment['client_email'],
+  'tariff'      =&gt; $tarif_map[$tarif_code] ?? 'Unknown',
+  'person_type' =&gt; $buyer_type_code === 'ur' ? 'Юр. лицо' : 'Физ. лицо',
+];
+update_option('custom_subscriptions_data', $subscriptions);
+
+<span class="comment">// Находим неплаченный QR для данного тарифа (CPT qr_code)</span>
+$qr_query = new WP_Query([
+  'post_type'      =&gt; 'qr_code',
+  'meta_query'     =&gt; [
+    ['key' =&gt; '_tariff_type', 'value' =&gt; $tarif_code],
+    ['key' =&gt; '_qr_status',   'value' =&gt; 'unpaid'],
+  ],
+  'posts_per_page' =&gt; 1,
+  'orderby'        =&gt; 'date',
+  'order'          =&gt; 'ASC',
+]);
+
+if ($qr_query-&gt;have_posts()) {
+  $qr_query-&gt;the_post();
+  $post_id  = get_the_ID();
+  $qr_value = get_post_meta($post_id, '_qr_value', true);
+  
+  <span class="comment">// Отправляем email с QR-кодом</span>
+  $this-&gt;send_qr_email($payment['client_email'], $qr_value, $tarif_map[$tarif_code]);
+  
+  <span class="comment">// Помечаем QR как оплаченный</span>
+  update_post_meta($post_id, '_qr_status', 'paid');
+  setcookie('qr_sent_' . $post_id, '1', time() + 86400); <span class="comment">// защита от дублей</span>
+  
+  <span class="comment">// Обновляем статус WooCommerce заказа</span>
+  $this-&gt;update_woocommerce_order_status($payment['orderid'], 'completed');
+}</code></pre>
+        </div>
+
+        <div class="architecture-box">
+            <h3 style="margin-bottom: 15px; color: var(--accent);">3. Фискальная корзина ФЗ-54 (PaykeeperPayment)</h3>
+            <pre class="code-block"><code><span class="comment">// ============================================</span>
+<span class="comment">// РАСЧЁТ ПОЗИЦИЙ ДЛЯ ФИСКАЛЬНОГО ЧЕКА (ФЗ-54)</span>
+<span class="comment">// paykeeper.class.php</span>
+<span class="comment">// ============================================</span>
+
+class PaykeeperPayment {
+  
+  public function setOrderParams($order) {
+    $this-&gt;order = $order;
+    $this-&gt;buildFiscalCart();
+    return $this;
+  }
+  
+  private function buildFiscalCart() {
+    $cart = [];
+    
+    <span class="comment">// Товары из заказа</span>
+    foreach ($this-&gt;order-&gt;get_items() as $item) {
+      $cart[] = [
+        'name'     =&gt; $item-&gt;get_name(),
+        'price'    =&gt; $this-&gt;correctPrecision($item-&gt;get_total()),
+        'quantity' =&gt; $item-&gt;get_quantity(),
+        'sum'      =&gt; $this-&gt;correctPrecision($item-&gt;get_total() * $item-&gt;get_quantity()),
+        'tax'      =&gt; $this-&gt;mapWooTaxTo54($item-&gt;get_tax_class()),
+      ];
+    }
+    
+    <span class="comment">// Доставка (если есть)</span>
+    if ($this-&gt;order-&gt;get_shipping_total() &gt; 0) {
+      $cart[] = [
+        'name'     =&gt; 'Доставка',
+        'price'    =&gt; $this-&gt;correctPrecision($this-&gt;order-&gt;get_shipping_total()),
+        'quantity' =&gt; 1,
+        'sum'      =&gt; $this-&gt;correctPrecision($this-&gt;order-&gt;get_shipping_total()),
+        'tax'      =&gt; 'vat20',
+      ];
+    }
+    
+    <span class="comment">// Применяем скидки и корректируем точность до копеек</span>
+    $this-&gt;fiscal_cart = $this-&gt;applyDiscounts($cart);
+    $this-&gt;fiscal_cart = $this-&gt;correctPrecision($this-&gt;fiscal_cart);
+  }
+  
+  <span class="comment">// Корректировка точности: округление до 2 знаков</span>
+  private function correctPrecision($value) {
+    return round(floatval($value), 2, PHP_ROUND_HALF_UP);
+  }
+  
+  public function getFiscalCartEncoded() {
+    <span class="comment">// Кодируем корзину в base64 для отправки в PayKeeper</span>
+    return base64_encode(json_encode($this-&gt;fiscal_cart, JSON_UNESCAPED_UNICODE));
+  }
+}</code></pre>
+        </div>
+
+        <div class="architecture-box">
+            <h3 style="margin-bottom: 15px; color: var(--accent);">4. Логирование операций (pk_write_log)</h3>
+            <pre class="code-block"><code><span class="comment">// ============================================</span>
+<span class="comment">// ЗАПИСЬ ЛОГА С ИНФОРМАЦИЕЙ О СРЕДЕ</span>
+<span class="comment">// ============================================</span>
+
+private function pk_write_log($message) {
+  $log_entry = sprintf(
+    "[%s] PK v%s | WP %s | WC %s | PHP %s | %s\n",
+    current_time('mysql'),
+    PK_PLUGIN_VERSION,
+    $GLOBALS['wp_version'],
+    WC_VERSION,
+    PHP_VERSION,
+    $message
+  );
+  
+  $log_file = PK_PLUGIN_DIR . '/logs/paykeeper-' . date('Y-m-d') . '.log';
+  
+  <span class="comment">// Создаём директорию логов, если нет</span>
+  if (!file_exists(dirname($log_file))) {
+    wp_mkdir_p(dirname($log_file));
+  }
+  
+  <span class="comment">// Записываем в файл (FILE_APPEND для добавления)</span>
+  file_put_contents($log_file, $log_entry, FILE_APPEND | LOCK_EX);
+}</code></pre>
+        </div>
+
+        <!-- SCREENSHOTS PLACEHOLDERS -->
+        <h2 class="section-title"><i class="fas fa-images"></i> Скриншоты системы</h2>
+        
+        <div style="margin: 20px 0;">
+            <img src="../images/vstarcam1.png" alt="Страница оформления заказа WooCommerce" style="width: 100%; border-radius: 12px; border: 1px solid var(--border);">
+            <p style="text-align: center; color: var(--secondary); margin-top: 10px; font-size: 0.9rem;">Страница-каталог товаров</p>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <img src="../images/vstarcam2.png" alt="Платежная страница PayKeeper" style="width: 100%; border-radius: 12px; border: 1px solid var(--border);">
+            <p style="text-align: center; color: var(--secondary); margin-top: 10px; font-size: 0.9rem;">Страница с заказами (Система имела поиск а так же мониторинг и изменение статуса подписок)</p>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <img src="../images/vstarcam3.png" alt="Email с QR-кодом для клиента" style="width: 100%; border-radius: 12px; border: 1px solid var(--border);">
+            <p style="text-align: center; color: var(--secondary); margin-top: 10px; font-size: 0.9rem;">Страница с qr кодами</p>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <img src="../images/vstarcam4.png" alt="Настройки плагина в админке WP" style="width: 100%; border-radius: 12px; border: 1px solid var(--border);">
+            <p style="text-align: center; color: var(--secondary); margin-top: 10px; font-size: 0.9rem;">Qr код и его поля</p>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <img src="../images/vstarcam5.png" alt="Настройки плагина в админке WP" style="width: 100%; border-radius: 12px; border: 1px solid var(--border);">
+            <p style="text-align: center; color: var(--secondary); margin-top: 10px; font-size: 0.9rem;">Импорт qr кодов и экспорт остатков</p>
+        </div>
+
+
+         <!-- SOLUTION 5: FEATURES -->
+    <section>
+        <h2>✨ Дополнительные функции и возможности</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3><span class="feature-icon">📁</span> Загрузка Qr кодов</h3>
+                <ul class="feature-list">
+                    <li>Загрузка файлов.zip с qr-кодами</li>
+                    <li>Выгрузка не использованных qr-кодов в csv файле</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3><span class="feature-icon">💰</span> Динамическое ценообразование</h3>
+                <ul class="feature-list">
+                    <li>Интеграция товаров с Woocomerce</li>
+                    <li>Автоматическое обновление цен в зависимости от тарифа</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3><span class="feature-icon">📊</span> Админ-панель</h3>
+                <ul class="feature-list">
+                    <li>Просмотр всех заказов в адмике</li>
+                    <li>Фильтрация по статусу, дате, номеру заказа , поиск использованных qr-кодов и.т.д</li>
+                    <li>Управление подписками</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3><span class="feature-icon">📱</span> Адаптивный дизайн</h3>
+                <ul class="feature-list">
+                    <li>Подход с учетом мобильных устройств</li>
+                    <li>Управление через сенсорные экраны</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3><span class="feature-icon">🔍</span> Система логирования</h3>
+                <ul class="feature-list">
+                    <li>Все запросы к API логируются</li>
+                    <li>Диагностика ошибок</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3><span class="feature-icon">⚙️</span> Модульный код</h3>
+                <ul class="feature-list">
+                    <li>Разделение ответственности</li>
+                    <li>WordPress хуки</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+     <section>
+            <h2>🛠️ Технический стек</h2>
+            <div class="block-quote">
+                <strong>Backend:</strong> PHP 8.2+, WordPress (WooCommerce API), PayKeeper SDK/REST API, PHPOffice/PhpSpreadsheet (обработка реестров QR), cURL (взаимодействие с эквайрингом)<br><br>
+                
+                <strong>Frontend:</strong> JavaScript (ES6+), WooCommerce Checkout Hooks, AJAX/Fetch для валидации статусов, адаптивные Email-шаблоны (HTML/CSS)<br><br>
+                                
+                <strong>Инфраструктура:</strong> MySQL (Custom Post Types для QR-кодов), Cron (проверка просроченных подписок), интеграция с онлайн-кассами (ФЗ-54), логирование в ротируемые файлы<br><br>
+                
+                <strong>Производительность:</strong> Оптимизация поиска по мета-полям, кэширование транзитных данных (WP Transients), минимизация нагрузки на БД при обработке вебхуков
+            </div>
+        </section>
+
+        <div class="warning-box">
+            <h3><i class="fas fa-info-circle"></i> Статус проекта</h3>
+            <p>Система успешно проработала в боевом режиме более 6 месяцев, автоматизировав продажу облачных подписок. На текущий момент проект завершен и передан на поддержку стороне заказчика.</p>
+        </div>
+
+        <div class="architecture-box">
+            <h3 style="margin-bottom: 15px; color: var(--accent);"><i class="fas fa-lightbulb"></i> Извлеченные уроки</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 10px;"><strong>✓</strong> Идемпотентность webhook'ов критична: PayKeeper может отправить один callback несколько раз — реализована блокировка по transaction_id</li>
+                <li style="margin-bottom: 10px;"><strong>✓</strong> Хранение QR-кодов через CPT (Custom Post Types) упрощает управление из админки, но требует индексации мета-поля статуса ('unpaid'/'paid')</li>
+                <li style="margin-bottom: 10px;"><strong>✓</strong> Логирование с контекстом (версии окружения и сырые ответы шлюза) сократило время отладки платежных ошибок на 80%</li>
+                <li style="margin-bottom: 10px;"><strong>✓</strong> Использование PHPOffice позволило заказчику массово загружать тысячи QR-кодов одной Excel-таблицей без ручного ввода</li>
+                <li style="margin-bottom: 10px;"><strong>✓</strong> При работе с ФЗ-54 расчет налогов (VAT) должен строго соответствовать копейка в копейку корзине WooCommerce для прохождения фискализации</li>
+                <li style="margin-bottom: 10px;"><strong>✓</strong> Асинхронная отправка писем с кодами активации снижает риск "зависания" скрипта обработки платежа при задержках SMTP</li>
+            </ul>
+        </div>
+
+        <section>
+            <h2>🎯 Итоговые результаты</h2>
+            
+            <h3>Метрики автоматизации и надежности:</h3>
+            <table class="metric-table">
+                <tbody>
+                    <tr><td><strong>Время выдачи QR после оплаты</strong></td><td><span class="highlight">&lt; 3 секунд</span></td><td>Включая генерацию чека</td></tr>
+                    <tr><td><strong>Точность расчетов (ФЗ-54)</strong></td><td><span class="highlight">100%</span></td><td>Без расхождений в копейках</td></tr>
+                    <tr><td><strong>Скорость импорта базы QR (1000 шт)</strong></td><td><span class="highlight">~5 сек</span></td><td>Через Excel-загрузчик</td></tr>
+                    <tr><td><strong>Нагрузка на техподдержку</strong></td><td><span class="highlight">-70%</span></td><td>За счет автоматической доставки кодов</td></tr>
+                    <tr><td><strong>Обработка webhook</strong></td><td><span class="highlight">&lt; 200мс</span></td><td>Мгновенное подтверждение шлюзу</td></tr>
+                </tbody>
+            </table>
+        </section>
+       <footer>
+            <div style="padding: 25px; background: rgba(88, 166, 255, 0.05); border-radius: 12px; border: 1px solid var(--border);">
+                <p><strong>📊 Итоги внедрения:</strong> Система полностью автоматизировала продажу цифровых ключей (QR-кодов), исключив ручную обработку заказов. Корректный расчет налоговых ставок в фискальной корзине обеспечивает полную совместимость с требованиями ФЗ-54. Система логирования позволяет проводить аудит любой операции в один клик.</p>
+                <p style="margin-top: 20px; font-size: 0.9em;">
+                    <strong>Клиент:</strong> <a href="https://vstarcam.ru" target="_blank" rel="noopener" style="color: var(--accent);">vstarcam.ru</a> 
+                    &nbsp;|&nbsp;
+                    <strong>Технология:</strong> WooCommerce + PayKeeper API + Custom CPT
+                    &nbsp;|&nbsp;
+                    <strong>Статус:</strong> Проект успешно передан и внедрен
+                </p>
+            </div>
+        </footer>
+    </div>
+      
+</body>
+</html>

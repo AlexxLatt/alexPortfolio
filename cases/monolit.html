@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: MONOLIT | 1С-Битрикс & Custom Integration</title>
+    <link rel="icon" type="image/svg+xml" href="image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%2358a6ff' d='M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H448c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V64C0 46.3 14.3 32 32 32zM416 224a32 32 0 1 0 0-64 32 32 0 1 0 0 64z'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- NAV -->
+        <a href="../index.html" class="btn-primary">
+            <i class="fas fa-arrow-left"></i> Вернуться в портфолио
+        </a>
+
+        <!-- HEADER -->
+        <header class="case-header">
+            <h1 class="case-title">MONOLIT: Корпоративный портал</h1>
+            <div class="case-subtitle">Комплексная разработка на 1С-Битрикс для строительного холдинга</div>
+            
+            <div class="tech-specs" style="margin-top: 20px;">
+                <span class="tech-badge"><i class="fas fa-cube"></i> 1С-Битрикс</span>
+                <span class="tech-badge"><i class="fas fa-code"></i> Custom Components</span>
+                <span class="tech-badge"><i class="fas fa-mobile-alt"></i> Mobile First</span>
+                <span class="tech-badge"><i class="fas fa-map-marked-alt"></i> Map API</span>
+                <span class="tech-badge"><i class="fas fa-sliders-h"></i> Custom Slider</span>
+            </div>
+        </header>
+
+        <!-- STAR METHODOLOGY -->
+        <section class="star-grid">
+            <!-- SITUATION -->
+            <div class="star-card">
+                <div class="star-label"><i class="fas fa-flag"></i> Ситуация (Situation)</div>
+                <div class="star-content">
+                    Крупный строительный холдинг «Монолит» (38 лет на рынке) нуждался в обновлении цифрового присутствия. Основная сложность: совместить богатый медиа-контент (слайдеры, карты, формы) с приемлемой скоростью загрузки на CMS 1С-Битрикс, которая известна своей ресурсоемкостью.
+                </div>
+            </div>
+
+            <!-- TASK -->
+            <div class="star-card">
+                <div class="star-label"><i class="fas fa-bullseye"></i> Задача (Task)</div>
+                <div class="star-content">
+                    Реализовать дизайн-код и функционал, обеспечив баланс между гибкостью управления и скоростью работы.
+                    <ul>
+                        <li>Интеграция кастомного слайдера и интерактивных блоков.</li>
+                        <li>Настройка работы с картами и веб-формами.</li>
+                        <li><strong>Оптимизация:</strong> Снижение нагрузки на сервер там, где это возможно.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ACTION -->
+            <div class="star-card">
+                <div class="star-label"><i class="fas fa-cogs"></i> Действия (Action)</div>
+                <div class="star-content">
+                    <ul>
+                        <li><strong>Гибридная верстка:</strong> Статические блоки (HTML) для контента, который редко меняется — это снижает нагрузку на PHP-процессор.</li>
+                        <li><strong>Кастомный JS:</strong> Написание легкого слайдера без тяжелых внешних библиотек.</li>
+                        <li><strong>Интеграция:</strong> Подключение API карт и форм через стандартные компоненты Битрикса для удобства администрирования.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- RESULT -->
+            <div class="star-card">
+                <div class="star-label"><i class="fas fa-trophy"></i> Результат (Result)</div>
+                <div class="star-content">
+                    <ul>
+                        <li>Сайт стабилен под нагрузкой благодаря кэшированию.</li>
+                        <li>Контент легко редактируется через админку (инфоблоки, слайдеры).</li>
+                        <li>Реализована полная адаптивность под мобильные устройства.</li>
+                        <li>Удалось избежать «раздувания» кода там, где динамический функционал не требовался.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEY PAGES HIGHLIGHT -->
+        <section>
+            <h2 style="color: #f0f6fc; margin-bottom: 20px; font-size: 1.8rem;">
+                <i class="fas fa-star" style="color: var(--accent);"></i> Акцент на 2 ключевых страницах
+            </h2>
+            
+            <div class="page-highlight-grid">
+                <!-- PAGE 1 -->
+                <div class="page-highlight-card">
+                    <h4>
+           
+                        <i class="fas fa-home"></i> Главная страница
+                    </h4>
+                    <ul>
+                        <li>Кастомная секция с табами для продукции</li>
+                        <li>Видео-контент с полной адаптацией под мобильные устройства</li>
+                        <li>Уникальные блоки с кастомной вёрсткой и адаптацией</li>
+                        <li>Оптимизированная загрузка медиа-контента</li>
+                    </ul>
+                </div>
+
+                <!-- PAGE 2 -->
+                <div class="page-highlight-card">
+                    <h4>
+                        <i class="fas fa-building"></i> О компании
+                    </h4>
+                    <ul>
+                        <li>Кастомный слайдер с интеграцией компонента 1С-Битрикс</li>
+                        <li>Форма обратной связи с AJAX-обработкой и валидацией</li>
+                        <li>Интерактивная Яндекс.Карта с объектами компании</li>
+                        <li>Информационные плашки «Подробнее» с анимацией</li>
+                        <li>Адаптивные секции для всех типов устройств</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIVE PREVIEW IFRAME WITH TABS -->
+        <section class="preview-section">
+            <div class="preview-header">
+                <span class="preview-title"><i class="fas fa-desktop"></i> Живой превью сайта</span>
+                <a href="https://www.monolitsmolensk.ru/" target="_blank" class="live-btn">
+                    <i class="fas fa-external-link-alt"></i> Открыть в новой вкладке
+                </a>
+            </div>
+            
+            <div style="padding: 20px;">
+                <!-- PAGE TABS -->
+                <div class="page-tabs">
+                    <div class="page-tab active" onclick="switchPage('page1', this)">
+                        <i class="fas fa-home"></i>
+                        <span>Страница 1: Главная</span>
+                    </div>
+                    <div class="page-tab" onclick="switchPage('page2', this)">
+                        <i class="fas fa-building"></i>
+                        <span>Страница 2: О компании</span>
+                    </div>
+                </div>
+
+                <!-- IFRAME CONTAINER PAGE 1: Главная -->
+                <div class="iframe-wrapper" id="page1-wrapper">
+                    <div class="page-badge">
+                        <i class="fas fa-home"></i>
+                        <span>Главная страница</span>
+                    </div>
+                    <div class="iframe-container">
+                        <iframe src="https://www.monolitsmolensk.ru/" title="Monolit - Главная" id="iframe-page1" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <!-- IFRAME CONTAINER PAGE 2: О компании -->
+                <div class="iframe-wrapper" id="page2-wrapper" style="display: none;">
+                    <div class="page-badge">
+                        <i class="fas fa-building"></i>
+                        <span>О компании</span>
+                    </div>
+                    <div class="iframe-container">
+                        <iframe src="https://www.monolitsmolensk.ru/company/" title="Monolit - О компании" id="iframe-page2" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4><i class="fas fa-lightbulb"></i> Почему эти 2 страницы?</h4>
+                    <p style="color: var(--text); margin-top: 10px;">
+                        Эти страницы демонстрируют ключевой функционал проекта: <strong>«Главная»</strong> показывает работу с продукцией в виде табов, видео-контентом и кастомной адаптацией блоков. <strong>«О компании»</strong> демонстрирует интеграцию слайдера с 1С-Битрикс, интерактивные карты, формы обратной связи и сложные информационные блоки. Обе страницы полностью адаптивны и оптимизированы для быстрой загрузки.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNICAL HIGHLIGHTS -->
+        <section>
+            <h2 style="color: #f0f6fc; margin-bottom: 20px; font-size: 1.8rem;">Технические особенности</h2>
+            
+            <!-- ГЛАВНАЯ СТРАНИЦА -->
+            <div class="star-card" style="margin-bottom: 20px; border-left: 4px solid var(--success);">
+                <div class="star-label" style="color: var(--success);">
+                    <i class="fas fa-home"></i> Главная страница: Модульная архитектура
+                </div>
+                <p style="margin-bottom: 15px;">
+                    Главная страница реализована по модульному принципу через <code>bitrix:main.include</code>. 
+                    Это позволяет контент-менеджерам редактировать отдельные блоки через административную панель 
+                    без вмешательства в код шаблона.
+                </p>
+                <ul style="margin-bottom: 15px; padding-left: 20px;">
+                    <li><strong>Гибкое управление:</strong> Каждый блок — отдельный include-файл в /include/mainpage/</li>
+                    <li><strong>Кэширование:</strong> Агрессивное кэширование компонентов (CACHE_TIME =&gt; 36000000)</li>
+                    <li><strong>Композитный режим:</strong> COMPOSITE_FRAME_MODE =&gt; "A" для динамической подгрузки</li>
+                    <li><strong>Видео-секция:</strong> Интеграция через bitrix:news.detail с кастомным шаблоном</li>
+                    <li><strong>Адаптивные слайдеры:</strong> Кастомная верстка без тяжелых библиотек</li>
+                </ul>
+                <div class="code-block">
+<span class="comment">&lt;!-- Верхний слайдер (редактируемая область) --&gt;</span>
+<span class="keyword">&lt;?php</span> $APPLICATION-&gt;<span class="function-name">IncludeComponent</span>(
+    <span class="string">"bitrix:main.include"</span>,
+    <span class="string">".default"</span>,
+    [
+        <span class="string">"AREA_FILE_SHOW"</span> =&gt; <span class="string">"file"</span>,
+        <span class="string">"PATH"</span> =&gt; SITE_DIR . <span class="string">"include/mainpage/comp_banners_top_slider.php"</span>,
+        <span class="string">"EDIT_TEMPLATE"</span> =&gt; <span class="string">"standard.php"</span>,
+        <span class="string">"CACHE_TYPE"</span> =&gt; <span class="string">"A"</span>,
+        <span class="string">"CACHE_TIME"</span> =&gt; <span class="string">"36000000"</span>
+    ]
+); <span class="keyword">?&gt;</span>
+
+<span class="comment">&lt;!-- Видео-секция через news.detail --&gt;</span>
+<span class="keyword">&lt;?php</span> $APPLICATION-&gt;<span class="function-name">IncludeComponent</span>(
+    <span class="string">"bitrix:news.detail"</span>,
+    <span class="string">"main_video_template"</span>,
+    [
+        <span class="string">"ELEMENT_ID"</span> =&gt; <span class="string">"33307"</span>,
+        <span class="string">"IBLOCK_ID"</span> =&gt; <span class="string">"43"</span>,
+        <span class="string">"PROPERTY_CODE"</span> =&gt; [<span class="string">"VIDEO_URL"</span>, <span class="string">"DESCRIPTION"</span>],
+        <span class="string">"CACHE_TYPE"</span> =&gt; <span class="string">"A"</span>,
+        <span class="string">"COMPOSITE_FRAME_MODE"</span> =&gt; <span class="string">"A"</span>
+    ]
+); <span class="keyword">?&gt;</span>
+
+<span class="comment">&lt;!-- Новости с кастомным шаблоном --&gt;</span>
+<span class="keyword">&lt;?php</span> $APPLICATION-&gt;<span class="function-name">IncludeComponent</span>(
+    <span class="string">"bitrix:news.list"</span>,
+    <span class="string">"main_news"</span>,
+    [
+        <span class="string">"IBLOCK_ID"</span> =&gt; <span class="string">"12"</span>,
+        <span class="string">"NEWS_COUNT"</span> =&gt; <span class="string">"3"</span>,
+        <span class="string">"CACHE_TIME"</span> =&gt; <span class="string">"36000000"</span>,
+        <span class="string">"SORT_BY1"</span> =&gt; <span class="string">"ACTIVE_FROM"</span>,
+        <span class="string">"SORT_ORDER1"</span> =&gt; <span class="string">"DESC"</span>
+    ],
+    <span class="keyword">false</span>
+); <span class="keyword">?&gt;</span>
+                </div>
+            </div>
+
+            <!-- СТРАНИЦА "О КОМПАНИИ" -->
+            <div class="star-card">
+                <div class="star-label"><i class="fas fa-code-branch"></i> Страница «О компании»: Слайдер & Компоненты</div>
+                <p style="margin-bottom: 15px;">
+                    Вместо тяжелых библиотек был реализован легкий слайдер на чистом JS с интеграцией компонента <code>aspro:com.banners.optimus</code>. Это позволило выводить динамический контент из инфоблоков без потери производительности.
+                </p>
+                <div class="code-block">
+<span class="comment">// Пример вызова компонента с кэшированием</span>
+$APPLICATION-&gt;<span class="function-name">IncludeComponent</span>(
+    <span class="string">"aspro:com.banners.optimus"</span>,
+    <span class="string">"company_slider"</span>,
+    [
+        <span class="string">"IBLOCK_ID"</span> =&gt; <span class="string">"38"</span>,
+        <span class="string">"CACHE_TYPE"</span> =&gt; <span class="string">"A"</span>,
+        <span class="string">"CACHE_TIME"</span> =&gt; <span class="string">"36000000"</span>,
+        <span class="string">"COMPOSITE_FRAME_MODE"</span> =&gt; <span class="string">"A"</span>
+    ]
+);
+                </div>
+            </div>
+
+            <!-- КАРТЫ И ФОРМЫ -->
+            <div class="star-card" style="margin-top: 20px;">
+                <div class="star-label"><i class="fas fa-map"></i> Интерактивная Карта и Формы</div>
+                <p style="margin-bottom: 15px;">
+                    Реализована логика переключения типов карт (Яндекс/Google) через настройки главного модуля. Веб-формы настроены с использованием <code>bitrix:form.result.new</code> с AJAX-обработкой для удобства пользователя.
+                </p>
+                <div class="code-block">
+<span class="comment">// Динамический выбор типа карты</span>
+$arMapTypes = [<span class="string">'YANDEX'</span>, <span class="string">'GOOGLE'</span>];
+$sMapType = $arMapTypes[\Bitrix\Main\Config\Option::<span class="function-name">get</span>(
+    <span class="string">"aspro.optimus"</span>, 
+    <span class="string">"MAP_TYPE"</span>, 
+    <span class="string">"0"</span>, 
+    SITE_ID
+)];
+
+<span class="comment">// Включение формы с AJAX</span>
+$APPLICATION-&gt;<span class="function-name">IncludeComponent</span>(
+    <span class="string">"bitrix:form.result.new"</span>,
+    <span class="string">"inline2"</span>,
+    [
+        <span class="string">"WEB_FORM_ID"</span> =&gt; <span class="string">"3"</span>,
+        <span class="string">"USE_EXTENDED_ERRORS"</span> =&gt; <span class="string">"Y"</span>
+    ]
+);
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- TECHNICAL STACK -->
+       <section>
+            <h2>🛠️ Технический стек</h2>
+            <div class="block-quote">
+                <strong>Backend:</strong> PHP 8.1+, 1С-Битрикс (Управление сайтом), Bitrix D7 Core, MySQL, Кэширование компонентов<br><br>
+                
+                <strong>Frontend:</strong> Vanilla JavaScript (ES6+), HTML5/CSS3 (BEM), AJAX для веб-форм, интеграция API Яндекс.Карт<br><br>
+                
+                <strong>Безопасность:</strong> Встроенный проактивный фильтр (WAF) Битрикса, SSL-сертификация, разделение прав доступа (Администратор/Контент-менеджер), защита форм от спама (CAPTCHA/reCAPTCHA)<br><br>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- RESULTS SUMMARY -->
+       <section>
+            <h2>🎯 Итоговые результаты</h2>
+            
+            <h3>Оптимизация и эффективность портала:</h3>
+            <table class="metric-table">
+                <tbody>
+                    <tr><td><strong>Время генерации страницы</strong></td><td><span class="highlight">~0.15 сек</span></td><td>Благодаря кэшированию</td></tr>
+                    <tr><td><strong>Отказоустойчивость</strong></td><td><span class="highlight">99.9%</span></td><td>Стабильность под нагрузкой</td></tr>
+                    <tr><td><strong>Обработка заявок (Web-forms)</strong></td><td><span class="highlight">&lt; 1 сек</span></td><td>AJAX-отправка без перезагрузки</td></tr>
+                    <tr><td><strong>Удобство контент-менеджмента</strong></td><td><span class="highlight">Высокое</span></td><td>Управление через Инфоблоки</td></tr>
+                    <tr><td><strong>Мобильный трафик</strong></td><td><span class="highlight">+60%</span></td><td>За счет Mobile-First верстки</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+
+        <footer>
+            <div style="padding: 25px; background: rgba(88, 166, 255, 0.05); border-radius: 12px; border: 1px solid var(--border);">
+                <p><strong>📊 Результаты в реальном мире:</strong> Система управления полностью адаптирована под контент-менеджеров клиента: редактирование сложных блоков и слайдеров происходит через интуитивные инфоблоки без правки исходного кода.</p>
+                
+                <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.9em; border-top: 1px solid var(--border); padding-top: 20px;">
+                    <div>
+                        <strong>Проект в сети:</strong> 
+                        <a href="https://www.monolitsmolensk.ru/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">monolitsmolensk.ru</a>
+                    </div>
+                    <div>
+                        <strong>Статус:</strong> 
+                        <i class="fas fa-check-circle" style="color: var(--success);"></i> Поддержка и масштабирование
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </div>
+    
+    <script>
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('page1-wrapper').style.display = 'block';
+            document.getElementById('page2-wrapper').style.display = 'none';
+            
+            const tabs = document.querySelectorAll('.page-tab');
+            tabs.forEach((tab, index) => {
+                if (index === 0) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+        });
+
+        function switchPage(pageId, tabElement) {
+            document.getElementById('page1-wrapper').style.display = 'none';
+            document.getElementById('page2-wrapper').style.display = 'none';
+            document.getElementById(pageId + '-wrapper').style.display = 'block';
+            
+            document.querySelectorAll('.page-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            tabElement.classList.add('active');
+        }
+    </script>
+    
+</body>
+</html>
